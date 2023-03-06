@@ -61,9 +61,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=edge,branch=main
+            type=edge,branch=main,enable=false
             type=ref,event=branch,suffix=-beta
             type=ref,event=tag
+            type=sha,enable=false
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
