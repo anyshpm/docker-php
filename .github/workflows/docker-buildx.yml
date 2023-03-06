@@ -1,8 +1,5 @@
 name: Publish Docker Image
 
-env:
-  TAG: edge
-
 on:
   push:
     branches: [ "main" ]
