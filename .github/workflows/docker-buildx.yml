@@ -1,0 +1,36 @@
+name: Publish Docker Image
+
+env:
+  TAG: edge
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+      with:
+        platforms: all
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+      with:
+        version: latest
+    
+    - uses: actions/checkout@v2
+
+    #- name: Available platforms
+    #  run: echo ${{ steps.buildx.outputs.platforms }}
+
+    - name: Login to Docker Registry
+      run: echo '${{ secrets.DOCKER_PASSWORD }}' | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+    - name: Build Docker Image
+      run: docker buildx build -t anyshpm/php:$TAG --platform linux/amd64,linux/arm64 --push .
