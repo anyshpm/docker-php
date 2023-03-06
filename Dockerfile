@@ -1,4 +1,4 @@
-FROM php:8.0.25-fpm-alpine3.16
+FROM php:8.0.28-fpm-alpine3.16
 
 RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.16/main' > /etc/apk/repositories
 RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.16/community' >> /etc/apk/repositories
@@ -36,4 +36,5 @@ RUN set -x \
 #               freetype \
                libgomp \
                imagemagick \
-    && rm -rf /tmp/pear ~/.pearrc
+    && rm -rf /tmp/pear ~/.pearrc \
+    && curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
