@@ -3,3 +3,9 @@
 sysvsem
 
 ......
+
+# Zabbix
+
+sockets(linux-headers)
+
+......
