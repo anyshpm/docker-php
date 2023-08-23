@@ -18,6 +18,7 @@ RUN set -x \
                libsodium-dev \
                freetype-dev \
                imagemagick-dev \
+               linux-headers \
     && docker-php-ext-configure gd --with-freetype --with-jpeg\
     && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql bcmath zip gd xml opcache mbstring gmp sodium posix pcntl sysvsem sockets \
     && pecl install imagick \
