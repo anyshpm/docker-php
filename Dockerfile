@@ -19,7 +19,7 @@ RUN set -x \
                freetype-dev \
                imagemagick-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql bcmath zip gd xml opcache mbstring gmp sodium posix pcntl sysvsem\
+    && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql bcmath zip gd xml opcache mbstring gmp sodium posix pcntl sysvsem sockets\
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && apk del .phpize-deps \
