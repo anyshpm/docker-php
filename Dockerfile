@@ -1,4 +1,4 @@
-FROM php:8.3.3-fpm-alpine3.18
+FROM php:8.2.16-fpm-alpine3.18
 
 #RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.17/main' > /etc/apk/repositories
 #RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.17/community' >> /etc/apk/repositories
