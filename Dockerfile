@@ -1,7 +1,7 @@
 FROM php:7.4.33-fpm-alpine3.15
 
-RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.15/main' > /etc/apk/repositories
-RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.15/community' >> /etc/apk/repositories
+#RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.15/main' > /etc/apk/repositories
+#RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.15/community' >> /etc/apk/repositories
 
 RUN set -x \
     && apk update \
@@ -18,7 +18,7 @@ RUN set -x \
                libsodium-dev \
                freetype-dev \
                imagemagick-dev \
-    && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql bcmath zip gd xml opcache mbstring gmp sodium posix sockets \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
