@@ -38,6 +38,7 @@ jobs:
         run: |
           CURRENT_VERSION=$(grep -oP 'FROM php:\K[0-9.]+' Dockerfile | head -1)
           echo "CURRENT_VERSION=${CURRENT_VERSION}" >> $GITHUB_ENV
+          echo "Current PHP version: ${CURRENT_VERSION}"
 
       # Check for new PHP 8.2 versions
       - name: Check for new PHP version
@@ -53,10 +54,21 @@ jobs:
             const latestVersion = releases.find(r => r.tag_name.startsWith('php-8.2.'));
             const currentVersion = process.env.CURRENT_VERSION;
             if (latestVersion && latestVersion.tag_name !== `php-${currentVersion}`) {
-              core.setOutput('new_version', latestVersion.tag_name.replace('php-', ''));
+              const newVersion = latestVersion.tag_name.replace('php-', '');
+              core.setOutput('new_version', newVersion);
+              core.summary.addHeading('PHP Version Update Summary');
+              core.summary.addRaw(`<p>Current version: ${currentVersion}</p>`);
+              core.summary.addRaw(`<p>New version detected: ${newVersion}</p>`);
+              core.summary.addRaw('<p>Update required: ✅ Yes</p>');
+              await core.summary.write();
               return `New PHP version detected: ${latestVersion.tag_name}`;
+            } else {
+              core.summary.addHeading('PHP Version Update Summary');
+              core.summary.addRaw(`<p>Current version: ${currentVersion}</p>`);
+              core.summary.addRaw('<p>Update required: ❌ No</p>');
+              await core.summary.write();
+              return 'No new PHP version found.';
             }
-            return 'No new PHP version found.';
 
   build:
     needs: check-php-version
