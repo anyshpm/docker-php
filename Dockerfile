@@ -1,4 +1,4 @@
-FROM php:8.2.21-fpm-alpine
+FROM php:8.2.29-fpm-alpine
 
 #RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.17/main' > /etc/apk/repositories
 #RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.17/community' >> /etc/apk/repositories
@@ -20,7 +20,7 @@ RUN set -x \
                imagemagick-dev \
                linux-headers \
     && docker-php-ext-configure gd --with-freetype --with-jpeg\
-    && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql bcmath zip gd xml opcache mbstring gmp sodium posix pcntl sysvsem sockets \
+    && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql bcmath zip gd xml opcache mbstring gmp sodium posix pcntl sysvsem sockets exif \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && apk del .phpize-deps \
