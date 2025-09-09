@@ -35,6 +35,8 @@ RUN set -x \
 #               gmp \
 #               libsodium \
 #               freetype \
+               libjpeg \
+               libgmpxx \
                libgomp \
                imagemagick \
     && rm -rf /tmp/pear ~/.pearrc \
