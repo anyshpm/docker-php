@@ -29,13 +29,16 @@ RUN set -x \
                sudo \
                icu-libs \
                libzip \
-#               libpng \
-#               libxml2 \
-#               oniguruma \
-#               gmp \
-#               libsodium \
-#               freetype \
+               libjpeg-turbo \
+               libpng \
+               freetype \
+               libxml2 \
+               oniguruma \
+               gmp \
+               libsodium \
                libgomp \
                imagemagick \
     && rm -rf /tmp/pear ~/.pearrc \
-    && curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+    && curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer \
+    && php -v \
+    && php -m
